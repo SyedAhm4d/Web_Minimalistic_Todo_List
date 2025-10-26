@@ -32,7 +32,7 @@ This project is a lightweight Todo list web application that allows you to add, 
 ## Technologies & Dependencies
 
 - Python (version 3.x)  
-- A web framework (if used — e.g., Flask) – verify your `main.py` implementation.  
+- A web framework 'Flask'  
 - HTML templates (in `templates/` directory)  
 - Standard libraries and minimal third-party packages to keep it simple.  
 
