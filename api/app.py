@@ -51,3 +51,10 @@ def star_data(id):
     task_star.starred=1 if task_star.starred==0 else 0
     db.session.commit()
     return redirect(url_for('home'))
+
+# Vercel serverless function handler
+if __name__ == '__main__':
+    app.run()
+else:
+    # For Vercel
+    handler = app
