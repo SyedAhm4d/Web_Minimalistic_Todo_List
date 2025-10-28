@@ -52,9 +52,5 @@ def star_data(id):
     db.session.commit()
     return redirect(url_for('home'))
 
-# Vercel serverless function handler
 if __name__ == '__main__':
-    app.run()
-else:
-    # For Vercel
-    handler = app
+    app.run(debug=True)
