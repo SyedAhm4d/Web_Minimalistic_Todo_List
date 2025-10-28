@@ -3,19 +3,18 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import mapped_column,Mapped,DeclarativeBase
 from sqlalchemy import Integer,String,Boolean,Date
 from datetime import datetime
+import os,dotenv
+dotenv.load_dotenv()
 
 app = Flask(__name__)
 
-# CREATE DB
 class Base(DeclarativeBase):
     pass
-# Connect to Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo_tasks.db'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
-
-# Cafe TABLE Configuration
 class Tasks(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     task: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
@@ -23,11 +22,6 @@ class Tasks(db.Model):
     starred: Mapped[str] = mapped_column(Integer, nullable=False)
     due_date: Mapped[str] = mapped_column(Date, nullable=False)
     completed_date: Mapped[str] = mapped_column(Date, nullable=True)
-    # has_toilet: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    # has_wifi: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    # has_sockets: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    # can_take_calls: Mapped[bool] = mapped_column(Boolean, nullable=False)
-    # coffee_price: Mapped[str] = mapped_column(String(250), nullable=True)
 
 with app.app_context():
     db.create_all()
